@@ -8,10 +8,12 @@ import javax.swing.table.DefaultTableModel;
  */
 public class TP_nro_5 extends javax.swing.JFrame {
 
-    private DefaultTableModel modelo = new DefaultTableModel();
+    private DefaultTableModel modelo = new DefaultTableModel(); // Agregado por programador
 
-    public TP_nro_5() {
+    public TP_nro_5() {  // Constructor
         initComponents();
+        armarCabecera();  // llamada al metodo private agregado
+        
     }
 
     /**
@@ -44,7 +46,7 @@ public class TP_nro_5 extends javax.swing.JFrame {
         jLabel2.setText("Categoria:");
 
         jcCategoria.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jcCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Alimento", "Electrodomestico", "Ropa", "Limpieza" }));
+        jcCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Alimento", "Electrodomestico", "Ropa" }));
         jcCategoria.setToolTipText("");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -137,15 +139,17 @@ public class TP_nro_5 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // Acción que va a tomar el boton Agregar Producto creado por el programador.
     private void jbAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarActionPerformed
         // Codigo agregado por el programador:
 
-        String categoria = (String) jcCategoria.getSelectedItem();
-        String nombre = jtNombre.getText();
+        String categoria = (String) jcCategoria.getSelectedItem(); //usando método getSelectedItem que devuelve un objeto y lo casteamos
+        String nombre = jtNombre.getText(); //tomamos en dato ingresado en el jtNombre usando getText
+        
         double precio = 0;
 
         try {
-            precio = Double.parseDouble(jtPrecio.getText());
+            precio = Double.parseDouble(jtPrecio.getText());//tomamos el datos ingresado en el jtPrecio y parseamos a double
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Error... Ingrese un número válido.");
             return;
@@ -154,13 +158,13 @@ public class TP_nro_5 extends javax.swing.JFrame {
         if((!nombre.equalsIgnoreCase(""))&&(precio>0)){
                        
         Object arr[] = {nombre, categoria, precio};
-        modelo.addRow(arr);
+        modelo.addRow(arr); //paso un arreglo de objeto, como si fuera un arrayList. 
         }else{
         JOptionPane.showMessageDialog(this,"Error... Debe ingresar un dato.");
         }
         
-        jtNombre.setText("");
-        jtPrecio.setText("");
+        jtNombre.setText("");// limpiamos campo Nombre
+        jtPrecio.setText("");// limpiamos campo Precio
     }//GEN-LAST:event_jbAgregarActionPerformed
 
     /**
@@ -211,11 +215,12 @@ public class TP_nro_5 extends javax.swing.JFrame {
     private javax.swing.JTable jtbProductos;
     // End of variables declaration//GEN-END:variables
 
-    private void armarCabecera() { //agregado por ususario
-        modelo.addColumn("Nombre ");
-        modelo.addColumn("Categoria ");
-        modelo.addColumn("Precio ");
-        jtbProductos.setModel(modelo);
+    private void armarCabecera() { //agregado por programador para personalizar tabla
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Categoria");
+        modelo.addColumn("Precio");
+        //modelo.addColumn("Limpieza");
+        jtbProductos.setModel(modelo); // para setera el modelo de tabla
 
     }
 
